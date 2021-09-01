@@ -38,19 +38,16 @@
   </div>
 </div>
 
+
 <div class="panel panel-default">
   <div class="panel-body">
-    <h2>Login with Implicit Flow in popup</h2>
+    <h2>REQUEST SOMETHING TO COMMUNITY SERVER</h2>
     <p>
-      <button class="btn btn-default" (click)="loginImplicitInPopup()">
-        Login
-      </button>
-      <button class="btn btn-default" (click)="logout()">Logout</button>
+      <button class="btn btn-default" (click)="callCommunityServer()">SEND REQUEST</button>
     </p>
-    <p><b>Username/Password:</b> max/geheim</p>
+     <h4>Response Body : </h4>
     <p>
-      <b>Note:</b> When using IE, some security settings block the communication
-      with popups. This prevents that this feature works.
+      {{responseData}}
     </p>
   </div>
 </div>

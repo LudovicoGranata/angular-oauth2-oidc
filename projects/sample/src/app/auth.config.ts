@@ -4,7 +4,7 @@ import { AuthConfig } from 'angular-oauth2-oidc';
 
 export const authConfig: AuthConfig = {
   // Url of the Identity Provider
-  issuer: 'https://idsvr4.azurewebsites.net',
+  issuer: 'http://localhost:8080/auth/realms/WebID-OIDC',
 
   // URL of the SPA to redirect the user to after login
   // redirectUri: window.location.origin
@@ -18,11 +18,11 @@ export const authConfig: AuthConfig = {
   silentRefreshRedirectUri: window.location.origin + '/silent-refresh.html',
 
   // The SPA's id. The SPA is registerd with this id at the auth-server
-  clientId: 'implicit',
+  clientId: 'test_client',
 
   // set the scope for the permissions the client should request
   // The first three are defined by OIDC. The 4th is a usecase-specific one
-  scope: 'openid profile email api',
+  scope: 'openid profile email',
 
   // silentRefreshShowIFrame: true,
 

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authCodeFlowConfig } from '../auth-code-flow.config';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   templateUrl: './home.component.html'
@@ -15,8 +16,28 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private oauthService: OAuthService
+    private oauthService: OAuthService,
+    private http: HttpClient
   ) {}
+
+  /*
+  responseData: String = ''
+  callCommunityServer() {
+
+     this.http.get('http://localhost:3000/myfile.ttl', {responseType:"text", headers:{'Authorization':'Bearer '+ this.oauthService.getAccessToken()}})
+    .subscribe(data => {this.responseData = data })
+    
+  }
+  */
+
+  responseData: String = '';
+  callCommunityServer() {
+    const headers = { 'Authorization': 'Bearer ' + this.oauthService.getAccessToken(), "Content-Type": "application/sparql-query", "Accept": "application/sparql-query" };
+    const body = 'SELECT * WHERE {GRAPH <http://localhost:3000/sepa_file.ttl> {?s ?p ?o}}';
+    this.http.post<any>('https://localhost:8444/secure/query', body, { headers }).subscribe(data => {
+        this.responseData = data.id; });
+  }
+  
 
   ngOnInit() {
     this.route.params.subscribe(p => {
